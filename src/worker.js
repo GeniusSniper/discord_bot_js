@@ -8,8 +8,14 @@
  * Learn more at https://developers.cloudflare.com/workers/
  */
 
-export default {
-  async fetch(request, env, ctx) {
-    return new Response('Hello World!');
-  },
-};
+require('dotenv').config(); //initializes dotenv
+const Discord = require('discord.js'); //imports discord.js
+
+const client = new Discord.Client({ intents: 8}); //creates new client
+
+client.on('ready', () => {
+  console.log(`Logged in as ${client.user.tag}!`);
+});
+
+//this line must be at the very end
+client.login(process.env.DISCORD_TOKEN); //signs the bot in with token
